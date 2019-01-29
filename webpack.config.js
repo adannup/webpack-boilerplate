@@ -20,7 +20,7 @@ class WebpackConfig {
     };
   }
 
-  static getOutput() {
+  getOutput() {
     const publicPath = Utils.isProdProcessENV() ? `.${FILE_PATH.public}` : FILE_PATH.public;
 
     return {
@@ -34,7 +34,7 @@ class WebpackConfig {
     return this.devtool;
   }
 
-  static getModule() {
+  getModule() {
     const cssConfig = webpackStyles.getStyleConfig();
     return {
       rules: [

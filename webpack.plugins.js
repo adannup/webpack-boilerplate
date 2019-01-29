@@ -23,7 +23,7 @@ class WebpackPlugins {
     });
   }
 
-  static getExtractTextPluginConfig() {
+  getExtractTextPluginConfig() {
     return new ExtractTextPlugin({
       filename: 'main.css',
       allChunks: true,
@@ -31,21 +31,21 @@ class WebpackPlugins {
     });
   }
 
-  static getCleanWebpackPluginConfig() {
+  getCleanWebpackPluginConfig() {
     return new CleanWebpackPlugin(['dist']);
   }
 
-  static getHotModuleReplacement() {
+  getHotModuleReplacement() {
     return new webpack.HotModuleReplacementPlugin();
   }
 
-  static getProdPlugins() {
+  getProdPlugins() {
     return [this.getCleanWebpackPluginConfig(), this.getExtractTextPluginConfig()];
   }
 
-  static getDevPlugins() {
+  getDevPlugins() {
     // return [this.HotModuleReplacement(), OpenBrowserPluginConfig];
-    return [this.HotModuleReplacement()];
+    return [this.getHotModuleReplacement()];
   }
 
   getPlugins() {
