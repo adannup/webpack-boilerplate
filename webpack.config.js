@@ -50,7 +50,7 @@ class WebpackConfig {
               loader: 'babel-loader',
               options: {
                 cacheDirectory: true,
-                presets: [['env', { modules: false }], 'react'],
+                presets: [['@babel/preset-env', { modules: false }], '@babel/preset-react'],
                 plugins: ['react-hot-loader/babel']
               }
             }
