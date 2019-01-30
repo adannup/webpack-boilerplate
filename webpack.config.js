@@ -65,6 +65,7 @@ class WebpackConfig {
     return {
       minimizer: [
         new UglifyJSPlugin({
+          parallel: true,
           uglifyOptions: {
             compress: {
               drop_console: true
