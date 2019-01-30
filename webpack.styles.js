@@ -1,25 +1,16 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FILE_PATH = require('./FILE_PATH');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Utils = require('./Utils');
 
 class WebpackStyles {
   constructor() {
     this.css = {
       dev: ['style-loader', 'css-loader', 'sass-loader'],
-      prod: ['css-loader', 'sass-loader']
+      prod: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
     };
   }
 
-  pluginExtractText() {
-    return ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: this.css.prod,
-      publicPath: FILE_PATH.public
-    });
-  }
-
   getStyleConfig() {
-    return Utils.isProdProcessENV() ? this.pluginExtractText() : this.css.dev;
+    return Utils.isProdProcessENV() ? this.css.prod : this.css.dev;
   }
 }
 

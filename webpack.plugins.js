@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const FILE_PATH = require('./FILE_PATH');
 const Utils = require('./Utils');
@@ -23,11 +22,12 @@ class WebpackPlugins {
     });
   }
 
-  getExtractTextPluginConfig() {
-    return new ExtractTextPlugin({
-      filename: 'main.css',
-      allChunks: true,
-      disable: false
+  getMiniCssExtractPlugiConfig() {
+    return new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: Utils.isProdProcessENV() ? '[name].css' : '[name].[hash].css',
+      chunkFilename: Utils.isProdProcessENV() ? '[id].css' : '[id].[hash].css'
     });
   }
 
@@ -40,7 +40,7 @@ class WebpackPlugins {
   }
 
   getProdPlugins() {
-    return [this.getCleanWebpackPluginConfig(), this.getExtractTextPluginConfig()];
+    return [this.getCleanWebpackPluginConfig(), this.getMiniCssExtractPlugiConfig()];
   }
 
   getDevPlugins() {
@@ -53,6 +53,5 @@ class WebpackPlugins {
     return [this.getHtmlWebpackPluginConfig(), ...pluginsConfig];
   }
 }
-// const OpenBrowserPluginConfig = new OpenBrowserPlugin({ url: 'http://localhost:3000' });
 
 module.exports = new WebpackPlugins();
