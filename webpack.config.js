@@ -74,6 +74,10 @@ class WebpackConfig {
       ]
     };
   }
+
+  getMode() {
+    return Utils.isProdProcessENV() ? 'production' : 'development';
+  }
 }
 
 const webpackConfig = new WebpackConfig();
@@ -83,7 +87,8 @@ const webpackModuleConfig = {
   module: webpackConfig.getModule(),
   devtool: webpackConfig.getDevTool(),
   plugins: webpackPlugins.getPlugins(),
-  optimization: webpackConfig.getOptimization()
+  optimization: webpackConfig.getOptimization(),
+  mode: webpackConfig.getMode()
 };
 
 module.exports = {
