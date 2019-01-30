@@ -1,3 +1,4 @@
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const FILE_PATH = require('./FILE_PATH');
 const Utils = require('./Utils');
 const webpackStyles = require('./webpack.styles');
@@ -59,6 +60,20 @@ class WebpackConfig {
       ]
     };
   }
+
+  getOptimization() {
+    return {
+      minimizer: [
+        new UglifyJSPlugin({
+          uglifyOptions: {
+            compress: {
+              drop_console: true
+            }
+          }
+        })
+      ]
+    };
+  }
 }
 
 const webpackConfig = new WebpackConfig();
@@ -67,7 +82,8 @@ const webpackModuleConfig = {
   output: webpackConfig.getOutput(),
   module: webpackConfig.getModule(),
   devtool: webpackConfig.getDevTool(),
-  plugins: webpackPlugins.getPlugins()
+  plugins: webpackPlugins.getPlugins(),
+  optimization: webpackConfig.getOptimization()
 };
 
 module.exports = {
