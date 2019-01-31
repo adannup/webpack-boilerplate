@@ -7,13 +7,13 @@ const Utils = require('./Utils');
 
 class WebpackPlugins {
   constructor() {
-    this.projectTitle = 'webpack-boilerplate';
+    this.projectName = Utils.getProjectName();
   }
 
   getHtmlWebpackPluginConfig() {
     return new HtmlWebpackPlugin({
       template: FILE_PATH.template,
-      title: this.projectTitle,
+      title: this.projectName,
       filename: 'index.html',
       minify: {
         collapseWhitespace: Utils.isProdProcessENV()
