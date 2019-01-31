@@ -44,7 +44,10 @@ class WebpackConfig {
           use: cssConfig
         },
         {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
+          resolve: {
+            extensions: ['.js', '.jsx']
+          },
           exclude: /node_modules/,
           use: [
             {
