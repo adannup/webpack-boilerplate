@@ -44,7 +44,9 @@ class WebpackConfig {
           use: [
             {
               loader: 'file-loader',
-              options: {}
+              options: {
+                outputPath: FILE_PATH.images.out
+              }
             }
           ]
         },

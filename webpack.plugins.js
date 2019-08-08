@@ -26,7 +26,7 @@ class WebpackPlugins {
     return new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: Utils.isProdProcessENV() ? '[name].css' : '[name].[hash].css',
+      filename: Utils.isProdProcessENV() ? `${FILE_PATH.css.out}/[name].css` : '[name].[hash].css',
       chunkFilename: Utils.isProdProcessENV() ? '[id].css' : '[id].[hash].css'
     });
   }
