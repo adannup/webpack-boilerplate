@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const opn = require('opn');
-const config = require('./webpack.config');
+const config = require('./webpackconfig/webpack.dev.config');
 
 const app = express();
 const compiler = webpack(config);
