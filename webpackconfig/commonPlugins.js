@@ -1,4 +1,4 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PATHS = require('../PATHS');
 const { getProjectName, isProductionENV } = require('../utils/processEnvUtils');
@@ -16,7 +16,7 @@ const getHtmlWebpackPluginConfig = () => {
 };
 
 const getCleanWebpackPluginConfig = () => {
-  return new CleanWebpackPlugin(['dist']);
+  return new CleanWebpackPlugin({ verbose: true });
 };
 
 const plugins = [getHtmlWebpackPluginConfig(), getCleanWebpackPluginConfig()];
