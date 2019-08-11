@@ -18,16 +18,7 @@ const loaders = [
       extensions: ['.js', '.jsx']
     },
     exclude: /node_modules/,
-    use: [
-      {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          presets: [['@babel/preset-env', { modules: false }], '@babel/preset-react'],
-          plugins: ['react-hot-loader/babel']
-        }
-      }
-    ]
+    use: 'babel-loader?cacheDirectory=true'
   }
 ];
 
