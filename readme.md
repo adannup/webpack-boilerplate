@@ -6,3 +6,13 @@
 
 - [Eslint class-methods.use-this](https://eslint.org/docs/rules/class-methods-use-this)
 - [[Discussion] class-methods-use-this](https://github.com/Shopify/javascript/issues/263)
+
+## TypeScript Install:
+
+- [typeScriptLang](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+- [pluralSight](https://www.pluralsight.com/guides/react-typescript-webpack)
+
+## TypeScript Issues:
+
+- [hot.module](https://github.com/vitaliy-bobrov/angular-hot-loader/issues/5)
+- [hot-module](https://github.com/webpack-contrib/webpack-hot-middleware/issues/89)
