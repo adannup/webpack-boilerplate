@@ -1,5 +1,5 @@
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const { loaders } = require('./commonLoaders');
 const { plugins } = require('./commonPlugins');
@@ -41,15 +41,7 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        parallel: true,
-        uglifyOptions: {
-          compress: {
-            drop_console: true,
-          },
-        },
-      }),
-    ],
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 };
