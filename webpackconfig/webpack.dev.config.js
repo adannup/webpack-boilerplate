@@ -1,4 +1,4 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 const { loaders } = require('./commonLoaders');
@@ -27,15 +27,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [...plugins, new webpack.HotModuleReplacementPlugin()],
   optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        parallel: true,
-        uglifyOptions: {
-          compress: {
-            drop_console: true
-          }
-        }
-      })
-    ]
-  }
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
 };
