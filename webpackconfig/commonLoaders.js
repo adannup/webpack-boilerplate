@@ -25,7 +25,7 @@ const loaders = [
     exclude: /node_modules/,
     use: 'ts-loader',
     resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions: ['.tsx', '.ts'],
     },
   },
   // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
