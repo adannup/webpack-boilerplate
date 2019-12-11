@@ -1,23 +1,19 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const merge = require('webpack-merge');
 
-const { loaders } = require('./commonLoaders');
-const { plugins } = require('./commonPlugins');
+const webpackCommon = require('./webpack.common');
 const PATHS = require('../PATHS');
 
-module.exports = {
+module.exports = merge(webpackCommon, {
   mode: 'production',
   entry: {
-    app: [PATHS.production.entry],
+    app: [PATHS.entry],
   },
   output: {
-    filename: '[name].bundle.js',
-    path: PATHS.production.output,
     publicPath: PATHS.production.publicPath,
   },
   module: {
     rules: [
-      ...loaders,
       {
         test: /\.scss$/,
         use: [
@@ -34,14 +30,9 @@ module.exports = {
     ],
   },
   plugins: [
-    ...plugins,
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets.css.output}/[name].css`,
       chunkFilename: '[id].css',
     }),
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
-};
+});

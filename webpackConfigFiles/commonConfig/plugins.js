@@ -1,7 +1,8 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PATHS = require('../PATHS');
-const { getProjectName, isProductionENV } = require('../utils/processEnvUtils');
+
+const PATHS = require('../../PATHS');
+const { getProjectName, isProductionENV } = require('../../utils/processEnvUtils');
 
 const getHtmlWebpackPluginConfig = () => {
   return new HtmlWebpackPlugin({
@@ -9,9 +10,9 @@ const getHtmlWebpackPluginConfig = () => {
     title: getProjectName(),
     filename: 'index.html',
     minify: {
-      collapseWhitespace: isProductionENV()
+      collapseWhitespace: isProductionENV(),
     },
-    hash: true
+    hash: true,
   });
 };
 
@@ -19,8 +20,4 @@ const getCleanWebpackPluginConfig = () => {
   return new CleanWebpackPlugin({ verbose: true });
 };
 
-const plugins = [getHtmlWebpackPluginConfig(), getCleanWebpackPluginConfig()];
-
-module.exports = {
-  plugins
-};
+module.exports = [getHtmlWebpackPluginConfig(), getCleanWebpackPluginConfig()];

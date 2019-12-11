@@ -4,14 +4,12 @@ const entry = path.join(__dirname, 'src/index.tsx');
 const output = path.join(__dirname, 'dist');
 
 module.exports = {
+  entry,
+  output,
   develop: {
-    entry,
-    output,
     publicPath: '/',
   },
   production: {
-    entry,
-    output,
     publicPath: './', // https://github.com/webpack/webpack-dev-middleware/issues/269#issue-301197700
   },
   assets: {

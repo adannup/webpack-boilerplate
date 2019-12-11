@@ -1,6 +1,6 @@
-const PATHS = require('../PATHS');
+const PATHS = require('../../PATHS');
 
-const loaders = [
+module.exports = [
   {
     test: /\.(png|jpg|gif)$/,
     use: [
@@ -35,5 +35,3 @@ const loaders = [
     loader: 'source-map-loader',
   },
 ];
-
-module.exports = { loaders };
