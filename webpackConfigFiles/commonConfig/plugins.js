@@ -1,11 +1,12 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const PATHS = require('../../PATHS');
 const { getProjectName, isProductionENV } = require('../../utils/processEnvUtils');
 
-const getHtmlWebpackPluginConfig = () => {
-  return new HtmlWebpackPlugin({
+const getHtmlWebpackPluginConfig = () =>
+  new HtmlWebpackPlugin({
     template: PATHS.assets.html.template,
     title: getProjectName(),
     filename: 'index.html',
@@ -14,10 +15,18 @@ const getHtmlWebpackPluginConfig = () => {
     },
     hash: true,
   });
-};
 
-const getCleanWebpackPluginConfig = () => {
-  return new CleanWebpackPlugin({ verbose: true });
-};
+const getCleanWebpackPluginConfig = () => new CleanWebpackPlugin({ verbose: true });
 
-module.exports = [getHtmlWebpackPluginConfig(), getCleanWebpackPluginConfig()];
+const getBundleAnalyzerPlugin = () =>
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    reportFilename: 'report.html',
+    openAnalyzer: false,
+  });
+
+module.exports = [
+  getHtmlWebpackPluginConfig(),
+  getCleanWebpackPluginConfig(),
+  getBundleAnalyzerPlugin(),
+];
