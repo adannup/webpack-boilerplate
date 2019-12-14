@@ -1,12 +1,13 @@
 const TerserPlugin = require('terser-webpack-plugin');
 
+const { isProductionENV } = require('../utils/processEnvUtils');
+const PATHS = require('../PATHS');
 const loaders = require('./commonConfig/loaders');
 const plugins = require('./commonConfig/plugins');
-const PATHS = require('../PATHS');
 
 module.exports = {
   output: {
-    filename: '[name].bundle.js',
+    filename: isProductionENV() ? '[name].bundle.[chunkhash].js' : '[name].bundle.[hash].js',
     path: PATHS.output,
   },
   module: {
@@ -14,7 +15,30 @@ module.exports = {
   },
   plugins,
   optimization: {
+    runtimeChunk: {
+      name: entrypoint => `runtime~${entrypoint.name}`,
+    },
+    moduleIds: 'hashed',
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+      }),
+    ],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/].*\.js$/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(css|scss|less)$/,
+          chunks: 'all',
+        },
+      },
+    },
   },
 };

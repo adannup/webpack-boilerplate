@@ -1,8 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
 
-const webpackCommon = require('./webpack.common');
+const { isProductionENV } = require('../utils/processEnvUtils');
 const PATHS = require('../PATHS');
+const webpackCommon = require('./webpack.common');
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
@@ -31,8 +32,12 @@ module.exports = merge(webpackCommon, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets.css.output}/[name].css`,
-      chunkFilename: '[id].css',
+      filename: isProductionENV()
+        ? `${PATHS.assets.css.output}/[name].[contenthash].css`
+        : `${PATHS.assets.css.output}/[name].css`,
+      chunkFilename: isProductionENV()
+        ? `${PATHS.assets.css.output}/[id].[contenthash].css`
+        : '[id].css',
     }),
   ],
 });
