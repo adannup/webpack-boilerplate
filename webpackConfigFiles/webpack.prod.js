@@ -1,9 +1,27 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 
 const { isProductionENV } = require('../utils/processEnvUtils');
 const PATHS = require('../PATHS');
 const webpackCommon = require('./webpack.common');
+
+const getBundleAnalyzerPlugin = () =>
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    reportFilename: 'report.html',
+    openAnalyzer: false,
+  });
+
+const getMiniCssExtractPlugin = () =>
+  new MiniCssExtractPlugin({
+    filename: isProductionENV()
+      ? `${PATHS.assets.css.output}/[name].[contenthash].css`
+      : `${PATHS.assets.css.output}/[name].css`,
+    chunkFilename: isProductionENV()
+      ? `${PATHS.assets.css.output}/[id].[contenthash].css`
+      : '[id].css',
+  });
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
@@ -30,14 +48,5 @@ module.exports = merge(webpackCommon, {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: isProductionENV()
-        ? `${PATHS.assets.css.output}/[name].[contenthash].css`
-        : `${PATHS.assets.css.output}/[name].css`,
-      chunkFilename: isProductionENV()
-        ? `${PATHS.assets.css.output}/[id].[contenthash].css`
-        : '[id].css',
-    }),
-  ],
+  plugins: [getMiniCssExtractPlugin(), getBundleAnalyzerPlugin()],
 });
