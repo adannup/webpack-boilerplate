@@ -25,6 +25,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "exclude": ["node_modules", "dist", "scripts", "jest"],
-  "include": ["src", "./server.js", "utils", "**/*.tsx", "**/*.ts", "**/*.js"]
+  "exclude": ["node_modules", "dist", "webpackConfigFiles/**/*"],
+  "include": ["src/**/*", "**/*.tsx", "**/*.ts"]
 }
