@@ -31,10 +31,15 @@ module.exports = merge(webpackCommon, {
       },
     ],
   },
-  devtool: 'inline-source-map',
+  devtool: 'cheap-eval-source-map',
   plugins: [
     getForkTsCheckerWebpackPlugin(),
     getForkTsCheckerNotifierWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  },
 });

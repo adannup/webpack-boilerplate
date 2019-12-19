@@ -1,5 +1,6 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 
@@ -58,4 +59,31 @@ module.exports = merge(webpackCommon, {
     ],
   },
   plugins: [getForkTsCheckerWebpackPlugin(), getMiniCssExtractPlugin(), getBundleAnalyzerPlugin()],
+  optimization: {
+    runtimeChunk: {
+      name: entrypoint => `runtime~${entrypoint.name}`,
+    },
+    moduleIds: 'hashed',
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+      }),
+    ],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/].*\.js$/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(css|scss|less)$/,
+          chunks: 'all',
+        },
+      },
+    },
+  },
 });
