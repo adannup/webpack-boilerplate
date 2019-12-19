@@ -1,4 +1,5 @@
 const PATHS = require('../../PATHS');
+const { isProductionENV } = require('../../utils/processEnvUtils');
 
 module.exports = [
   {
@@ -25,10 +26,17 @@ module.exports = [
     exclude: /node_modules/,
     use: [
       {
+        loader: 'thread-loader',
+        options: {
+          // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+          workers: require('os').cpus().length - 1,
+          poolTimeout: isProductionENV() ? 2000 : Infinity, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
+        },
+      },
+      {
         loader: 'ts-loader',
         options: {
-          transpileOnly: true, // disable type checker - we will use it in fork plugin
-          experimentalWatchApi: true,
+          happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
         },
       },
     ],

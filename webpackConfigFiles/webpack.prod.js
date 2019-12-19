@@ -27,6 +27,7 @@ const getMiniCssExtractPlugin = () =>
 const getForkTsCheckerWebpackPlugin = () =>
   new ForkTsCheckerWebpackPlugin({
     async: false,
+    checkSyntacticErrors: true, // This option is useful if you're using ts-loader in happyPackMode with thread-loader.
     useTypescriptIncrementalApi: true,
     memoryLimit: 4096,
   });

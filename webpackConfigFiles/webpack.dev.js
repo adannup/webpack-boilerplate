@@ -8,6 +8,7 @@ const PATHS = require('../PATHS');
 
 const getForkTsCheckerWebpackPlugin = () =>
   new ForkTsCheckerWebpackPlugin({
+    checkSyntacticErrors: true, // This option is useful if you're using ts-loader in happyPackMode with thread-loader.
     eslint: true,
   });
 
