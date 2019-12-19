@@ -23,7 +23,15 @@ module.exports = [
   {
     test: /\.ts(x?)$/,
     exclude: /node_modules/,
-    use: 'ts-loader',
+    use: [
+      {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true, // disable type checker - we will use it in fork plugin
+          experimentalWatchApi: true,
+        },
+      },
+    ],
     resolve: {
       extensions: ['.tsx', '.ts'],
     },

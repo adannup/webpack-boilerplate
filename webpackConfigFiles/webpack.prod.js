@@ -1,3 +1,4 @@
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
@@ -21,6 +22,13 @@ const getMiniCssExtractPlugin = () =>
     chunkFilename: isProductionENV()
       ? `${PATHS.assets.css.output}/[id].[contenthash].css`
       : '[id].css',
+  });
+
+const getForkTsCheckerWebpackPlugin = () =>
+  new ForkTsCheckerWebpackPlugin({
+    async: false,
+    useTypescriptIncrementalApi: true,
+    memoryLimit: 4096,
   });
 
 module.exports = merge(webpackCommon, {
@@ -48,5 +56,5 @@ module.exports = merge(webpackCommon, {
       },
     ],
   },
-  plugins: [getMiniCssExtractPlugin(), getBundleAnalyzerPlugin()],
+  plugins: [getForkTsCheckerWebpackPlugin(), getMiniCssExtractPlugin(), getBundleAnalyzerPlugin()],
 });

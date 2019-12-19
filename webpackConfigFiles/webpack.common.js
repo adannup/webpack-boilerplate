@@ -6,6 +6,7 @@ const loaders = require('./commonConfig/loaders');
 const plugins = require('./commonConfig/plugins');
 
 module.exports = {
+  context: process.cwd(), // to automatically find tsconfig.json
   output: {
     filename: isProductionENV() ? '[name].bundle.[chunkhash].js' : '[name].bundle.[hash].js',
     path: PATHS.output,
