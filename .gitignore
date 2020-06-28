@@ -2,3 +2,4 @@
 /dist/
 coverage
 .eslintcache
+.DS_Store
