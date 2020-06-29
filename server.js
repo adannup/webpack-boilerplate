@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const opn = require('opn');
-const config = require('./webpackconfig/webpack.dev.config');
+const config = require('./webpack/webpack.dev');
 
 const app = express();
 const compiler = webpack(config);
@@ -14,8 +14,8 @@ app.use(
   webpackDevMiddleware(compiler, {
     logLevel: 'error',
     stats: { colors: true },
-    publicPath: config.output.publicPath
-  })
+    publicPath: config.output.publicPath,
+  }),
 );
 
 app.use(webpackHotMiddleware(compiler));
