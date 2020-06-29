@@ -1,5 +1,5 @@
 const PATHS = require('../../PATHS');
-const { isProductionENV } = require('../../utils/processEnvUtils');
+const { isProductionENV } = require('../../utils/enviroment');
 
 module.exports = [
   {

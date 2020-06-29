@@ -1,7 +1,7 @@
-const { isProductionENV } = require('../utils/processEnvUtils');
+const { isProductionENV } = require('../utils/enviroment');
 const PATHS = require('../PATHS');
-const loaders = require('./commonConfig/loaders');
-const plugins = require('./commonConfig/plugins');
+const loaders = require('./common/loaders');
+const plugins = require('./common/plugins');
 
 module.exports = {
   context: process.cwd(), // to automatically find tsconfig.json

@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 
-const { isProductionENV } = require('../utils/processEnvUtils');
+const { isProductionENV } = require('../utils/enviroment');
 const PATHS = require('../PATHS');
 const webpackCommon = require('./webpack.common');
 
@@ -61,7 +61,7 @@ module.exports = merge(webpackCommon, {
   plugins: [getForkTsCheckerWebpackPlugin(), getMiniCssExtractPlugin(), getBundleAnalyzerPlugin()],
   optimization: {
     runtimeChunk: {
-      name: entrypoint => `runtime~${entrypoint.name}`,
+      name: (entrypoint) => `runtime~${entrypoint.name}`,
     },
     moduleIds: 'hashed',
     minimize: true,
