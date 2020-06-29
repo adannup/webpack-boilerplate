@@ -10,7 +10,7 @@
     "start": "npm run dev",
     "build": "npm run prod",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --cache --ext .js --ext .jsx --format codeframe src/** webpack.*.js *.config.js --color"
+    "lint": "eslint --cache --ext .js,.jsx . --color --format codeframe --ignore-path .gitignore"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.1",
+    "eslint-plugin-react-hooks": "^4.0.4",
     "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",

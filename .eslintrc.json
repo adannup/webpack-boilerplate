@@ -1,9 +1,14 @@
 {
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
   "rules": {
-    "prettier/prettier": ["error"],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "class-methods-use-this": ["warn"]
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "import/extensions": [".js", ".jsx"]
   }
 }

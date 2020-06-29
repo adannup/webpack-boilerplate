@@ -1,4 +1,4 @@
-const webpackProdConfig = require('./webpackconfig/webpack.prod.config.js');
+const webpackProdConfig = require('./webpack/webpack.prod');
 
 const environment = (process.env.NODE_ENV || 'production').trim();
 if (environment === 'production') {
