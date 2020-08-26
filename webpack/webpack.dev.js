@@ -1,4 +1,3 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 const loaders = require('./common/loaders');
@@ -25,17 +24,5 @@ module.exports = {
     ],
   },
   devtool: 'inline-source-map',
-  plugins: [...plugins, new webpack.HotModuleReplacementPlugin()],
-  optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        parallel: true,
-        uglifyOptions: {
-          compress: {
-            drop_console: true,
-          },
-        },
-      }),
-    ],
-  },
+  plugins: [...plugins, new webpack.HotModuleReplacementPlugin()]
 };
