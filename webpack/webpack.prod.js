@@ -1,23 +1,20 @@
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
-const loaders = require('./common/loaders');
-const plugins = require('./common/plugins');
 const PATHS = require('../PATHS');
+const webpackCommon = require('./webpack.common');
 
-module.exports = {
+module.exports = merge(webpackCommon, {
   mode: 'production',
   entry: {
-    app: [PATHS.production.entry],
+    app: [PATHS.entry],
   },
   output: {
-    filename: '[name].bundle.js',
-    path: PATHS.production.output,
     publicPath: PATHS.production.publicPath,
   },
   module: {
     rules: [
-      ...loaders,
       {
         test: /\.scss$/,
         use: [
@@ -33,24 +30,18 @@ module.exports = {
       },
     ],
   },
-  devtool: 'inline-source-map',
   plugins: [
-    ...plugins,
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets.css.output}/[name].css`,
       chunkFilename: '[id].css',
     }),
   ],
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJSPlugin({
+      new TerserPlugin({
         parallel: true,
-        uglifyOptions: {
-          compress: {
-            drop_console: true,
-          },
-        },
       }),
     ],
   },
-};
+});

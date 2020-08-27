@@ -1,23 +1,19 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 
-const loaders = require('./common/loaders');
-const plugins = require('./common/plugins');
 const PATHS = require('../PATHS');
+const webpackCommon = require('./webpack.common');
 
-module.exports = {
+module.exports = merge(webpackCommon, {
   mode: 'development',
   entry: {
-    app: ['react-hot-loader/patch', PATHS.develop.entry, 'webpack-hot-middleware/client'],
+    app: ['react-hot-loader/patch', PATHS.entry, 'webpack-hot-middleware/client'],
   },
   output: {
-    filename: '[name].bundle.js',
-    path: PATHS.develop.output,
-    publicPath: PATHS.develop.public,
+    publicPath: PATHS.develop.publicPath,
   },
   module: {
     rules: [
-      ...loaders,
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -25,17 +21,5 @@ module.exports = {
     ],
   },
   devtool: 'inline-source-map',
-  plugins: [...plugins, new webpack.HotModuleReplacementPlugin()],
-  optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        parallel: true,
-        uglifyOptions: {
-          compress: {
-            drop_console: true,
-          },
-        },
-      }),
-    ],
-  },
-};
+  plugins: [new webpack.HotModuleReplacementPlugin()]
+});
