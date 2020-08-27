@@ -1,6 +1,6 @@
-const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge');
 
 const PATHS = require('../PATHS');
 const webpackCommon = require('./webpack.common');
