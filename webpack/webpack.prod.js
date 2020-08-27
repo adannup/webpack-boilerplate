@@ -2,10 +2,10 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
-const { isProductionENV } = require('../utils/enviroment');
 const PATHS = require('../PATHS');
+const { isProductionENV } = require('../utils/enviroment');
 const webpackCommon = require('./webpack.common');
 
 const getBundleAnalyzerPlugin = () =>
