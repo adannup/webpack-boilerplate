@@ -6,14 +6,19 @@ const { merge } = require('webpack-merge');
 const webpackCommon = require('./webpack.common');
 const PATHS = require('../PATHS');
 
-const getForkTsCheckerWebpackPlugin = () => new ForkTsCheckerWebpackPlugin({
-  eslint: {
-    enabled: true,
-    files: './src/**/*.{ts,tsx,js,jsx}',
-  },
-});
+const getForkTsCheckerWebpackPlugin = () =>
+  new ForkTsCheckerWebpackPlugin({
+    eslint: {
+      enabled: true,
+      files: './src/**/*.{ts,tsx,js,jsx}',
+    },
+  });
 
-const getForkTsCheckerNotifierWebpackPlugin = () => new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false });
+const getForkTsCheckerNotifierWebpackPlugin = () =>
+  new ForkTsCheckerNotifierWebpackPlugin({
+    title: 'TypeScript',
+    excludeWarnings: false,
+  });
 
 module.exports = merge(webpackCommon, {
   mode: 'development',
