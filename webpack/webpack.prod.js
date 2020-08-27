@@ -8,24 +8,27 @@ const PATHS = require('../PATHS');
 const { isProductionENV } = require('../utils/enviroment');
 const webpackCommon = require('./webpack.common');
 
-const getBundleAnalyzerPlugin = () => new BundleAnalyzerPlugin({
-  analyzerMode: 'static',
-  reportFilename: 'report.html',
-  openAnalyzer: false,
-});
+const getBundleAnalyzerPlugin = () =>
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    reportFilename: 'report.html',
+    openAnalyzer: false,
+  });
 
-const getMiniCssExtractPlugin = () => new MiniCssExtractPlugin({
-  filename: isProductionENV()
-    ? `${PATHS.assets.css.output}/[name].[contenthash].css`
-    : `${PATHS.assets.css.output}/[name].css`,
-  chunkFilename: isProductionENV()
-    ? `${PATHS.assets.css.output}/[id].[contenthash].css`
-    : '[id].css',
-});
+const getMiniCssExtractPlugin = () =>
+  new MiniCssExtractPlugin({
+    filename: isProductionENV()
+      ? `${PATHS.assets.css.output}/[name].[contenthash].css`
+      : `${PATHS.assets.css.output}/[name].css`,
+    chunkFilename: isProductionENV()
+      ? `${PATHS.assets.css.output}/[id].[contenthash].css`
+      : '[id].css',
+  });
 
-const getForkTsCheckerWebpackPlugin = () => new ForkTsCheckerWebpackPlugin({
-  async: false,
-});
+const getForkTsCheckerWebpackPlugin = () =>
+  new ForkTsCheckerWebpackPlugin({
+    async: false,
+  });
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
