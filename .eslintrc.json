@@ -1,14 +1,27 @@
 {
-  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
-  "rules": {
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "class-methods-use-this": ["warn"]
-  },
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "settings": {
-    "import/extensions": [".js", ".jsx"]
-  }
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    },
+    "settings": {
+        "import/extensions": [".js", ".jsx"]
+    }
 }
