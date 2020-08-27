@@ -24,8 +24,3 @@ Related: https://medium.com/@cosmvs/painless-migration-from-tslint-to-eslint-for
 - [hot.module](https://github.com/vitaliy-bobrov/angular-hot-loader/issues/5)
 - [hot-module](https://github.com/webpack-contrib/webpack-hot-middleware/issues/89)
 
-#### Issue Eslint 6.X:
-
-- **Description:** ESLint fails to load plugins when using ESLint 6.x
-- **Action:** downgrade eslint version ´6.5.1´ to ´5.16.0´
-- **Related**: [#696](https://github.com/microsoft/vscode-eslint/issues/696)
