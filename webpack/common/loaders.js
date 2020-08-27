@@ -1,6 +1,6 @@
 const PATHS = require('../../PATHS');
 
-const loaders = [
+module.exports = [
   {
     test: /\.(png|jpg|gif)$/,
     use: [
@@ -21,5 +21,3 @@ const loaders = [
     use: 'babel-loader?cacheDirectory=true',
   },
 ];
-
-module.exports = loaders;
