@@ -1,0 +1,5 @@
+# Ignore artifacts:
+.eslintrc.json
+tsconfig.json
+dist
+coverage

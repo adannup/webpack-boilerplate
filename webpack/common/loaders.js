@@ -1,3 +1,5 @@
+const os = require('os');
+
 const PATHS = require('../../PATHS');
 const { isProductionENV } = require('../../utils/enviroment');
 
@@ -22,21 +24,23 @@ module.exports = [
     use: 'babel-loader?cacheDirectory=true',
   },
   {
-    test: /\.ts(x?)$/,
+    test: /\.tsx?$/,
     exclude: /node_modules/,
     use: [
       {
         loader: 'thread-loader',
         options: {
           // there should be 1 cpu for the fork-ts-checker-webpack-plugin
-          workers: require('os').cpus().length - 1,
+          workers: os.cpus().length - 1,
           poolTimeout: isProductionENV() ? 2000 : Infinity, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
         },
       },
       {
         loader: 'ts-loader',
         options: {
-          happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+          // IMPORTANT! use happyPackMode mode to speed-up compilation
+          // and reduce errors reported to webpack
+          happyPackMode: true,
         },
       },
     ],

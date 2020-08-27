@@ -23,5 +23,6 @@ app.use(webpackHotMiddleware(compiler));
 
 app.listen(PORT, () => {
   opn(openURI);
+  // eslint-disable-next-line no-console
   console.log(`Server up on port: ${PORT}`);
 });

@@ -9,5 +9,5 @@ const getProjectName = () => {
 
 module.exports = {
   getProjectName,
-  isProductionENV
+  isProductionENV,
 };

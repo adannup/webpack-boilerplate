@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 interface HeaderProps {
   title: string;
 }
 
-class Header extends Component<HeaderProps> {
-  render() {
-    return <h1>{this.props.title}</h1>;
-  }
-}
+const Header: React.FC<HeaderProps> = ({ title }) => <h1>{title}</h1>;
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default Header;
