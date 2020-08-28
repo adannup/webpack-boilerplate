@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PATHS = require('../../PATHS');
 const { getProjectName, isProductionENV } = require('../../utils/enviroment');
 
-const getHtmlWebpackPluginConfig = () => {
-  return new HtmlWebpackPlugin({
+const getHtmlWebpackPluginConfig = () =>
+  new HtmlWebpackPlugin({
     template: PATHS.assets.html.template,
     title: getProjectName(),
     filename: 'index.html',
@@ -14,12 +14,7 @@ const getHtmlWebpackPluginConfig = () => {
     },
     hash: true,
   });
-};
 
-const getCleanWebpackPluginConfig = () => {
-  return new CleanWebpackPlugin({ verbose: true });
-};
+const getCleanWebpackPluginConfig = () => new CleanWebpackPlugin({ verbose: true });
 
-const plugins = [getHtmlWebpackPluginConfig(), getCleanWebpackPluginConfig()];
-
-module.exports = plugins;
+module.exports = [getHtmlWebpackPluginConfig(), getCleanWebpackPluginConfig()];
