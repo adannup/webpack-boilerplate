@@ -1,4 +1,5 @@
 # Ignore artifacts:
+node_modules
 .eslintrc.json
 tsconfig.json
 dist
