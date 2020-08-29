@@ -1,3 +1,4 @@
 # Don't lint the code coverage results files.
 coverage/*
 node_modules
+dist
