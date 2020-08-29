@@ -10,6 +10,7 @@
     "dev": "NODE_PORT=$npm_package_PORT NODE_NAME=$npm_package_name node server.js",
     "start": "npm run dev",
     "build": "npm run prod",
+    "build:report": "REPORT=bundle npm run prod",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint . --cache --ext .js --ext .tsx --format codeframe --color"
