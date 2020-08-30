@@ -16,6 +16,8 @@ const getBundleAnalyzerPlugin = () =>
 
 const getMiniCssExtractPlugin = () =>
   new MiniCssExtractPlugin({
+    // Long Term Caching
+    // https://webpack.js.org/plugins/mini-css-extract-plugin/#long-term-caching
     filename: `${PATHS.assets.css.output}/[name].[contenthash].css`,
     chunkFilename: `${PATHS.assets.css.output}/[id].[contenthash].css`,
   });
@@ -33,7 +35,7 @@ const getPlugins = () =>
 module.exports = merge(webpackCommon, {
   mode: 'production',
   entry: {
-    app: [PATHS.entry],
+    main: [PATHS.entry],
   },
   output: {
     publicPath: PATHS.production.publicPath,
@@ -60,6 +62,8 @@ module.exports = merge(webpackCommon, {
     runtimeChunk: {
       name: (entrypoint) => `runtime~${entrypoint.name}`,
     },
+    // Module Identifiers
+    // https://webpack.js.org/guides/caching/#module-identifiers
     moduleIds: 'hashed',
     minimize: true,
     minimizer: [
@@ -67,18 +71,32 @@ module.exports = merge(webpackCommon, {
         parallel: true,
       }),
     ],
+    // SplitChunksPlugin - Default Configuration
+    // https://webpack.js.org/plugins/split-chunks-plugin/#defaults
     splitChunks: {
-      chunks: 'all',
+      chunks: 'async',
+      minSize: 20000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
       cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/].*\.js$/,
-          name: 'vendors',
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          // Extracting Boilerplate
+          // https://webpack.js.org/guides/caching/#extracting-boilerplate
+          // Example 2 of SplitChunksPlugin
+          // https://webpack.js.org/plugins/split-chunks-plugin/#split-chunks-example-2
+          name: 'vendor',
           chunks: 'all',
         },
-        styles: {
-          name: 'styles',
-          test: /\.(css|scss|less)$/,
-          chunks: 'all',
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
         },
       },
     },

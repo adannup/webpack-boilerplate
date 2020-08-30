@@ -30,6 +30,7 @@ module.exports = [
       {
         loader: 'thread-loader',
         options: {
+          // https://medium.com/webpack/typescript-webpack-super-pursuit-mode-83cc568dea79
           // there should be 1 cpu for the fork-ts-checker-webpack-plugin
           workers: os.cpus().length - 1,
           poolTimeout: isProductionENV() ? 2000 : Infinity, // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
@@ -39,7 +40,9 @@ module.exports = [
         loader: 'ts-loader',
         options: {
           // IMPORTANT! use happyPackMode mode to speed-up compilation
-          // and reduce errors reported to webpack
+          // This implicitly sets *transpileOnly* to true
+          // and WARNING! stops registering all errors to webpack.
+          // https://github.com/TypeStrong/ts-loader#happypackmode
           happyPackMode: true,
         },
       },
@@ -47,11 +50,5 @@ module.exports = [
     resolve: {
       extensions: ['.tsx', '.ts'],
     },
-  },
-  // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-  {
-    enforce: 'pre',
-    test: /\.js$/,
-    loader: 'source-map-loader',
   },
 ];
