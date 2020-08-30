@@ -1,10 +1,10 @@
 const { loaders, plugins } = require('./common');
-
 const PATHS = require('../PATHS');
+const { isProductionENV } = require('../utils/enviroment');
 
 module.exports = {
   output: {
-    filename: '[name].bundle.js',
+    filename: isProductionENV() ? '[name].[chunkhash].js' : '[name].[hash].js',
     path: PATHS.output,
   },
   module: {

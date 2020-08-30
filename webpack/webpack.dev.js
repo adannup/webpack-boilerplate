@@ -7,10 +7,13 @@ const webpackCommon = require('./webpack.common');
 module.exports = merge(webpackCommon, {
   mode: 'development',
   entry: {
-    app: ['react-hot-loader/patch', PATHS.entry, 'webpack-hot-middleware/client'],
+    main: ['react-hot-loader/patch', PATHS.entry, 'webpack-hot-middleware/client'],
   },
   output: {
     publicPath: PATHS.develop.publicPath,
+    // Output Without Path Info
+    // https://webpack.js.org/guides/build-performance/#output-without-path-info
+    pathinfo: false,
   },
   module: {
     rules: [
@@ -20,6 +23,15 @@ module.exports = merge(webpackCommon, {
       },
     ],
   },
-  devtool: 'inline-source-map',
+  // Devtool
+  // https://webpack.js.org/guides/build-performance/#devtool
+  devtool: 'eval-cheap-module-source-map',
   plugins: [new webpack.HotModuleReplacementPlugin()],
+  // Avoid Extra Optimization Steps
+  // https://webpack.js.org/guides/build-performance/#avoid-extra-optimization-steps
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  },
 });
