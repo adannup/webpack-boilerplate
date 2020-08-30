@@ -28,7 +28,7 @@ const getForkTsCheckerWebpackPlugin = () =>
   });
 
 const getPlugins = () =>
-  process.env.REPORT === 'bundle'
+  process.env.REPORT === 'analyze'
     ? [getForkTsCheckerWebpackPlugin(), getMiniCssExtractPlugin(), getBundleAnalyzerPlugin()]
     : [getForkTsCheckerWebpackPlugin(), getMiniCssExtractPlugin()];
 
